@@ -10,8 +10,9 @@ export const getCarReservationData = async (start_gte: string, end_lte: string) 
     
     const carReservationFetch = await getFetchData(url);
     carReservationFetch.forEach((carReservationArray:any) => {
-        console.log("val",carReservationArray)
-        carReservationArrays.push(carReservationArray.results)
+        for(let i = 0; i < carReservationArray.results.length; i++){
+        carReservationArrays.push(carReservationArray.results[i])
+        }
     });
 
     return carReservationArrays;

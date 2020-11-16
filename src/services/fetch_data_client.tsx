@@ -14,8 +14,8 @@ export const getFetchData = async (startUrl:string) => {
     
     while (hasNextPage) {
         counter++
-        console.log("page number: ", counter)
-        const result = await fetch(urlArray[urlArray.length - 1], {
+        // console.log("page number: ", counter)
+        await fetch(urlArray[urlArray.length - 1], {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export const getFetchData = async (startUrl:string) => {
             .then(response => response.json())
 
             .then(data => {
-                console.log("data", data.next)
+                // console.log("data", data.next)
                 nextPage = data.next;
                 fetchData.push(data)
 
@@ -35,13 +35,14 @@ export const getFetchData = async (startUrl:string) => {
                 }
                 else {
                     hasNextPage = false
-                    console.log("Fetch Completed")
+                    // console.log("Fetch Completed")
                 }
 
             })
             .catch(err => console.log('error', err))
     }
-    console.log("fetchData", fetchData)
+    
+    // console.log("fetchData", fetchData)
     return fetchData;
 
 }
