@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-function AllVehiclesDistanceOverview() {
-  
-  const [count, setCount] = useState(0);
+
+const AllVehiclesDistanceOverview: React.FC = () => {  
 
   return (
-    <div>
-      <p>AllVehiclesDistanceOverview</p>
-    </div>
-  );
+      <div>
+         <p>AllVehiclesDistanceOverview Component</p>
+      </div>
+  )
 }
+
+
+export default AllVehiclesDistanceOverview;

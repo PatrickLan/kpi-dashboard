@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {getFetchData} from './services/fetch_data_client'
-
+import {getFetchData} from './services/fetch_data_client';
+import  AllVehiclesDistanceOverview  from './components/allVehiclesDistanceOverview';
 
 
 function App() {
@@ -10,15 +9,11 @@ function App() {
   const carPoolArray = getFetchData("https://devteilautos.zemtu.com/marketplace/api/v2/vehicle")
   
    console.log("carReservationsArray", carReservationsArray)
-  console.log("carPoolArray", carPoolArray)
-  
-
-
+   console.log("carPoolArray", carPoolArray)
   
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <AllVehiclesDistanceOverview/>
     </div>
   );
 }
