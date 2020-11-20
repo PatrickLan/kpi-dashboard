@@ -1,4 +1,4 @@
-import {randomRgbColor} from '../randomRgbColor';
+import randomRgbColor from '../randomRgbColor';
 
 describe('test randomRgbColor', () => {
 test('randomRgbColor', () => {
