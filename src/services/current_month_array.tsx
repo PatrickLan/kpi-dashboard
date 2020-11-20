@@ -7,7 +7,7 @@ function getMonthNumber() {
 const monthArray = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli","August","September","Oktober","November", "Dezember",
 "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli","August","September","Oktober","November", "Dezember"];
 
-export const getUpdatedMonthArray = () => {
+export const getUpdatedMonthArray = async () => {
     const currentMonthNumber = getMonthNumber();
     const updatedMonthArray = monthArray.filter((month:string, index: number) => { 
         return currentMonthNumber <= index && index <= currentMonthNumber + 11});
