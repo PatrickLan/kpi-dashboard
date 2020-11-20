@@ -1,11 +1,14 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
+import {getUpdatedMonthArray} from '../../../services/current_month_array';
+
+const currentMonthsArray = getUpdatedMonthArray();
 
 class ChartsPage extends React.Component {
   state = {
     dataLine: {
-      labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Oktober","November", "Dezember"],
+      labels: currentMonthsArray,
       datasets: [
         {
           label: "My First dataset",
