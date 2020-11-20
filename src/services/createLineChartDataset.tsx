@@ -1,7 +1,7 @@
+import React from "react";
 
 export function createDataset ( label: string, data: number[], rgbColor: string) {
     return {
-        // label: "My Second dataset",
         label: label,
         fill: true,
         lineTension: 0.3,
@@ -20,7 +20,6 @@ export function createDataset ( label: string, data: number[], rgbColor: string)
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        // data: [28, 48, 40, 19, 86, 27, 90]
         data: data
     }
 }

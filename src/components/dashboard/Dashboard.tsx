@@ -1,25 +1,25 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import './Dashboard.css';
-import ChartsPage from '../dashboard/graphcomponents/Firstgraph'
+import AllVehiclesDistanceOverview from '../allVehicleDistanceOverview/allVehiclesDistanceOverview';
 
-;
+
 const FlexboxPage = () => (
     <MDBContainer>
         <MDBRow>
             <MDBCol>    
-                <ChartsPage/>
+                <AllVehiclesDistanceOverview/>
             </MDBCol>
             <MDBCol>
-                <ChartsPage/>
+                {/* <ChartsPage/> */}
             </MDBCol>
         </MDBRow>
         <MDBRow>
             <MDBCol>
-                <ChartsPage/>
+                {/* <ChartsPage/> */}
             </MDBCol>
             <MDBCol>
-                <ChartsPage/>
+                {/* <ChartsPage/> */}
             </MDBCol>
         </MDBRow>
     
