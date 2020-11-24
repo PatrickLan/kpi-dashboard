@@ -6,7 +6,7 @@ export const getCarData = async () => {
     const carPool = await getFetchData(url);
     const carPoolResults = carPool[0].results;
     
-    // console.log("carPoolResults",carPoolResults )
+    // console.log("carPoolResults",carPoolResults)
     return carPoolResults;
     }
 
