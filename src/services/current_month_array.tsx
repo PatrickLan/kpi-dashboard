@@ -1,4 +1,4 @@
-function getMonthNumber() {
+export const getMonthNumber = () => {
     const date = new Date();
     const monthNumber  = date.getMonth();
     return monthNumber;
