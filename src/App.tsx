@@ -1,27 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css'
 import Dashboard from './components/dashboard/Dashboard';
-import { MDBContainer} from "mdbreact";
-import SpinnerPage from '../src/components/spinner/Spinner';
 
-let loaded = true;
 
-function App() {
-
-  if (loaded)
+  function App() {
     return (
       <div className="App">
-        <Dashboard />
+        <Dashboard/>
       </div>
     );
-  return (
-    <MDBContainer>
-        <div className="mx-auto">
-          <SpinnerPage></SpinnerPage>
-        </div>
-    </MDBContainer>
-  )
 }
- 
-
 export default App;
+ 

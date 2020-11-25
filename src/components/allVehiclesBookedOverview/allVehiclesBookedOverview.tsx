@@ -1,8 +1,11 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
+import SpinnerPage from '../spinner/Spinner'
 
 const AllVehiclesBookedOverview = (props: any) => {  
+  
+  if(props.bookedTimeDataline.datasets !== undefined)
 
     return (
       <MDBContainer size="sm">
@@ -10,6 +13,13 @@ const AllVehiclesBookedOverview = (props: any) => {
         <Line data={props.bookedTimeDataline} options={{ responsive: true }} />
       </MDBContainer>
     );
+    return (
+      <MDBContainer>
+          <div className="mx-auto">
+            <SpinnerPage/>
+          </div>
+      </MDBContainer>
+    )
 }
 
 export default AllVehiclesBookedOverview;
