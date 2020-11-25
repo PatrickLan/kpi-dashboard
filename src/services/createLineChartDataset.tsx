@@ -1,10 +1,10 @@
-import React from "react";
+import {Dataset} from '../model/dataset_interface';
 
-export function createDataset ( label: string, data: number[], rgbColor: string) {
+export function createDataset ( label: string[], data: number[], rgbColor: string): Dataset {
     return {
         label: label,
-        fill: true,
-        lineTension: 0.3,
+        fill: false,
+        lineTension: 0.2,
         backgroundColor: "rgba(184, 185, 210, .3)",
         borderColor: rgbColor,
         borderCapStyle: "butt",

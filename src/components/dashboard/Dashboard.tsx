@@ -34,9 +34,8 @@ const Dashboard = ()  => {
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths = await getUpdatedMonthArray();
   
-      //Array mit den zurückgelegten Distanzen (Reihenfolge wie arrayWithLastTwelveMonths)
+      //Arrays mit den Daten
       let distanceArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
       let usedTimeArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       
       let carReservations:any = [];
@@ -58,14 +57,13 @@ const Dashboard = ()  => {
           // zurückgelegt Distanz/Fahrzeug/Monat für die Distanzkomponente
           let distancesTraveled = carReservations[i].distance;
   
-
-          // gefahrene Zeit für die Zeitkomponente
-          let bookedTime = Date.parse(carReservations[i].reservation_end) - Date.parse(carReservations[i].reservation_start);
-  
-          let actualReservationMonth = carReservations[i].end_booked.slice(5, 7);
-          let searchedMonth: string = "";
+          // gefahrene Zeit/Fahrzeug/Monat für die Zeitkomponente
+          let bookedTime = (Date.parse(carReservations[i].reservation_end) - Date.parse(carReservations[i].reservation_start))/3600000;
   
           //index des ReservierungsMonats in arrayWithLastTwelveMonths bekommen
+          let actualReservationMonth = carReservations[i].end_booked.slice(5, 7);
+          let searchedMonth: string = "";
+          
           switch(actualReservationMonth){
             case "01":
               searchedMonth = "Januar";
@@ -106,10 +104,14 @@ const Dashboard = ()  => {
          }
   
          let searchedIndex =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
+         
+         //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren
          distanceArray[searchedIndex] += distancesTraveled;
          usedTimeArray[searchedIndex] += bookedTime;
         }
   
+    
+        //Erstellen der Datasets zur grafischen Darstellung
         let color = randomRGBColor();
 
         let distanceDataset = createDataset(label, distanceArray, color);
@@ -118,8 +120,9 @@ const Dashboard = ()  => {
         let bookedTimeDataset = createDataset(label, usedTimeArray, color);
         bookedTimeDatasets.push(bookedTimeDataset);
 
+        //Reset nach dem Loop
         usedTimeArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        distanceArray =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        distanceArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         carReservations=[];
       }
   
@@ -144,8 +147,6 @@ const Dashboard = ()  => {
 
   return (
     <MDBContainer >
-        <button onClick={click}>Propänderung</button>
-        <button onClick={clicktest}>PROTEST</button>
       <MDBRow >
         <MDBCol >
           <AllVehiclesDistanceOverview carDistanceDataline={carDistanceDataline}/>

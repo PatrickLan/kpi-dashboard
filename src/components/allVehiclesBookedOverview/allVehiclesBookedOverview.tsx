@@ -6,7 +6,7 @@ const AllVehiclesBookedOverview = (props: any) => {
 
     return (
       <MDBContainer size="sm">
-        <h3 className="mt-5">AllVehiclesBookedOverview</h3>
+        <h3 className="mt-5">AllVehiclesBookedTimeOverview</h3>
         <Line data={props.bookedTimeDataline} options={{ responsive: true }} />
       </MDBContainer>
     );
