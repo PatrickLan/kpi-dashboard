@@ -1,8 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-import {Dataline} from '../../model/dataline_interface'
-import SpinnerPage from '../spinner/Spinner'
+import {Dataline} from '../../model/dataline_interface';
+import SpinnerPage from '../spinner/Spinner';
 
 const AllVehiclesBookedOverview = (props: any) => {  
   
@@ -10,12 +10,13 @@ const AllVehiclesBookedOverview = (props: any) => {
 
     return (
       <MDBContainer size="sm">
-        <h3 className="mt-5">AllVehiclesBookedTimeOverview</h3>
+        <h3 className="mt-5">Gebuchte Stunden</h3>
         <Line data={props.carBookedTimeDataline} options={{ responsive: true }} />
       </MDBContainer>
     );
     return (
       <MDBContainer>
+        <h3 className="mt-5">Gebuchte Stunden wird geladen</h3>
           <div className="mx-auto">
             <SpinnerPage/>
           </div>

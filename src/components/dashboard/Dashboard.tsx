@@ -14,8 +14,8 @@ import {Dataset} from '../../model/dataset_interface';
 import {Dataline} from '../../model/dataline_interface'
 
 const Dashboard = ()  => {
-    const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline | {}>({});
-    const [carBookedTimeDataline, setCarBookedTimeDataline] = useState<Dataline | {}>({});
+    const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline|{}>({});
+    const [carBookedTimeDataline, setCarBookedTimeDataline] = useState<Dataline|{}>({});
 
     const getChartData = async () => {
       let carArray: any = [];
@@ -27,7 +27,7 @@ const Dashboard = ()  => {
   
       //Alle Reservierungsdaten der letzten 12 Monate fetchen
       let first: string = "01";
-      let firstDayOfThirteenMonthsAgo: string = moment().subtract(3, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
+      let firstDayOfThirteenMonthsAgo: string = moment().subtract(13, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
       let firstDayOfCurrentMonth: string = moment().format('YYYY-MM-DD').substring(0, 8)+first;
       let start_gte: string = `${firstDayOfThirteenMonthsAgo}T00:00`;
       let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
@@ -151,8 +151,8 @@ const Dashboard = ()  => {
         </MDBCol>
       </MDBRow>
       <MDBRow> 
-        <MDBCol>{/* <ChartsPage/> */}</MDBCol>
-        <MDBCol>{/* <ChartsPage/> */}</MDBCol>
+        <MDBCol><p>seite 3</p></MDBCol>
+        <MDBCol><p>seite 4</p></MDBCol>
       </MDBRow>
     </MDBContainer>
   );
