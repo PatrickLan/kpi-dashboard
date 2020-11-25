@@ -8,6 +8,6 @@ export const getCarData = async () => {
     
     // console.log("carPoolResults",carPoolResults)
     return carPoolResults;
-    }
+}
 
 

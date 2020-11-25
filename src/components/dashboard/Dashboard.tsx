@@ -9,34 +9,35 @@ import { getCarData } from '../../services/car_pool_data';
 import { createDataset } from '../../services/createLineChartDataset';
 import  randomRGBColor  from '../../services/randomRgbColor';
 import {createDataline} from '../../services/createDataline';
-import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
+import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview';
+import {Dataset} from '../../model/dataset_interface';
+import {Dataline} from '../../model/dataline_interface'
 
 const Dashboard = ()  => {
-    const [carDistanceDataline, setCarDistanceDataline] = useState({});
-    const [bookedTimeDataline, setbookedTimeDataline] = useState({});
+    const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline | {}>({});
+    const [carBookedTimeDataline, setCarBookedTimeDataline] = useState<Dataline | {}>({});
 
     const getChartData = async () => {
       let carArray: any = [];
-      let distanceDatasets = [];
-      let bookedTimeDatasets = [];
+      let distanceDatasets: Dataset[] = [];
+      let bookedTimeDatasets: Dataset[] = [];
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
   
       //Alle Reservierungsdaten der letzten 12 Monate fetchen
-      let first = "01";
-      let firstDayOfThirteenMonthsAgo = moment().subtract(13, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
-      let firstDayOfCurrentMonth = moment().format('YYYY-MM-DD').substring(0, 8)+first;
-      let start_gte = `${firstDayOfThirteenMonthsAgo}T00:00`;
-      let end_lte = `${firstDayOfCurrentMonth}T00:00`;
+      let first: string = "01";
+      let firstDayOfThirteenMonthsAgo: string = moment().subtract(3, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
+      let firstDayOfCurrentMonth: string = moment().format('YYYY-MM-DD').substring(0, 8)+first;
+      let start_gte: string = `${firstDayOfThirteenMonthsAgo}T00:00`;
+      let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
       const reservationData: any = await getCarReservationData(start_gte, end_lte);
   
       //Array mit den letzten 12 Monaten importieren
-      let arrayWithLastTwelveMonths = await getUpdatedMonthArray();
+      let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();
   
-      //Array mit den zurückgelegten Distanzen (Reihenfolge wie arrayWithLastTwelveMonths)
+      //Arrays mit den Daten
       let distanceArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
       let usedTimeArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       
       let carReservations:any = [];
@@ -58,14 +59,13 @@ const Dashboard = ()  => {
           // zurückgelegt Distanz/Fahrzeug/Monat für die Distanzkomponente
           let distancesTraveled = carReservations[i].distance;
   
-
-          // gefahrene Zeit für die Zeitkomponente
-          let bookedTime = Date.parse(carReservations[i].reservation_end) - Date.parse(carReservations[i].reservation_start);
-  
-          let actualReservationMonth = carReservations[i].end_booked.slice(5, 7);
-          let searchedMonth: string = "";
+          // gefahrene Zeit/Fahrzeug/Monat für die Zeitkomponente
+          let bookedTime = (Date.parse(carReservations[i].reservation_end) - Date.parse(carReservations[i].reservation_start))/3600000;
   
           //index des ReservierungsMonats in arrayWithLastTwelveMonths bekommen
+          let actualReservationMonth: string = carReservations[i].end_booked.slice(5, 7);
+          let searchedMonth: string = "";
+          
           switch(actualReservationMonth){
             case "01":
               searchedMonth = "Januar";
@@ -105,21 +105,26 @@ const Dashboard = ()  => {
               break;
          }
   
-         let searchedIndex =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
+         let searchedIndex: number =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
+         
+         //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren
          distanceArray[searchedIndex] += distancesTraveled;
          usedTimeArray[searchedIndex] += bookedTime;
         }
   
-        let color = randomRGBColor();
+    
+        //Erstellen der Datasets zur grafischen Darstellung
+        let color: string = randomRGBColor();
 
-        let distanceDataset = createDataset(label, distanceArray, color);
+        let distanceDataset: Dataset  = createDataset(label, distanceArray, color);
         distanceDatasets.push(distanceDataset);
 
-        let bookedTimeDataset = createDataset(label, usedTimeArray, color);
+        let bookedTimeDataset: Dataset = createDataset(label, usedTimeArray, color);
         bookedTimeDatasets.push(bookedTimeDataset);
 
+        //Reset nach dem Loop
         usedTimeArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        distanceArray =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        distanceArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         carReservations=[];
       }
   
@@ -127,16 +132,9 @@ const Dashboard = ()  => {
       setCarDistanceDataline(distanceDataline);
 
       let bookedTimeDataline = createDataline(arrayWithLastTwelveMonths, bookedTimeDatasets);
-      setbookedTimeDataline(bookedTimeDataline);
+      setCarBookedTimeDataline(bookedTimeDataline);
     }
   
-    const click = () => {
-        setCarDistanceDataline("");
-    }
-
-    const clicktest = ()=>{
-        console.log("Main Props", carDistanceDataline)
-    }
     useEffect (()=>{
       getChartData();
     }, [])
@@ -144,14 +142,12 @@ const Dashboard = ()  => {
 
   return (
     <MDBContainer >
-        <button onClick={click}>Propänderung</button>
-        <button onClick={clicktest}>PROTEST</button>
       <MDBRow >
         <MDBCol >
           <AllVehiclesDistanceOverview carDistanceDataline={carDistanceDataline}/>
         </MDBCol>
         <MDBCol>
-          <AllVehiclesBookedOverview bookedTimeDataline={bookedTimeDataline}/>
+          <AllVehiclesBookedOverview carBookedTimeDataline={carBookedTimeDataline}/>
         </MDBCol>
       </MDBRow>
       <MDBRow> 
