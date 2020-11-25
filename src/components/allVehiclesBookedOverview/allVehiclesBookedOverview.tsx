@@ -1,8 +1,9 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
+import {Dataline} from '../../model/dataline_interface'
 
-const AllVehiclesBookedOverview = (props: any) => {  
+const AllVehiclesBookedOverview = (props: any ) => {  
 
     return (
       <MDBContainer size="sm">
