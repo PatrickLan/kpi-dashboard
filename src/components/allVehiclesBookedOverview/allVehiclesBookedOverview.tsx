@@ -6,12 +6,12 @@ import SpinnerPage from '../spinner/Spinner'
 
 const AllVehiclesBookedOverview = (props: any) => {  
   
-  if(props.bookedTimeDataline.datasets !== undefined)
+  if(props.carBookedTimeDataline.datasets !== undefined)
 
     return (
       <MDBContainer size="sm">
         <h3 className="mt-5">AllVehiclesBookedTimeOverview</h3>
-        <Line data={props.bookedTimeDataline} options={{ responsive: true }} />
+        <Line data={props.carBookedTimeDataline} options={{ responsive: true }} />
       </MDBContainer>
     );
     return (
