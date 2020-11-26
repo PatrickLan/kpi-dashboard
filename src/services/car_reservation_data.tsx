@@ -6,6 +6,7 @@ import {CarReservationsArray} from '../model/car_reservations_array_interface';
 // Fetch reservationData for all cars. From start_gte till end_lte
 
 export const getCarReservationData = async (start_gte: string, end_lte: string): Promise<CarReservationsArray[]> => {
+
     let url: string = `https://devteilautos.zemtu.com/api/v2/reservationaccounting/?reservation_start__gte=${start_gte}&reservation_end__lte=${end_lte}`
     
     const carReservationArrays: CarReservationsArray[] = []; 

@@ -10,12 +10,13 @@ const AllVehiclesDistanceOverview  = (props: any) => {
   
   return (
     <MDBContainer size="sm">
-      <h3 className="mt-5">AllVehiclesDistanceOverview</h3>
+      <h3 className="mt-5">Gefahrene Distanzen</h3>
       <Line data={props.carDistanceDataline} options={{ responsive: true }} />
     </MDBContainer>
   );
   return (
     <MDBContainer>
+      <h3 className="mt-5">Gefahrene Distanzen wird geladen</h3>
         <div className="mx-auto">
           <SpinnerPage/>
         </div>
