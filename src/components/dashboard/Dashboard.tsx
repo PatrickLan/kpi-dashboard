@@ -10,13 +10,15 @@ import { createDataset } from '../../services/createLineChartDataset';
 import  randomRGBColor  from '../../services/randomRgbColor';
 import {createDataline} from '../../services/createDataline';
 import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
+import { CarPoolData} from '../../model/car_pool_interface';
+import {CarPoolResultsArray} from '../../model/car_pool_results_array_interface';
 
 const Dashboard = ()  => {
     const [carDistanceDataline, setCarDistanceDataline] = useState({});
     const [bookedTimeDataline, setbookedTimeDataline] = useState({});
 
     const getChartData = async () => {
-      let carArray: any = [];
+      let carArray: CarPoolData | any = [];
       let distanceDatasets = [];
       let bookedTimeDatasets = [];
   
@@ -29,7 +31,7 @@ const Dashboard = ()  => {
       let firstDayOfCurrentMonth = moment().format('YYYY-MM-DD').substring(0, 8)+first;
       let start_gte = `${firstDayOfThirteenMonthsAgo}T00:00`;
       let end_lte = `${firstDayOfCurrentMonth}T00:00`;
-      const reservationData: any = await getCarReservationData(start_gte, end_lte);
+      const reservationData: CarPoolResultsArray | any  = await getCarReservationData(start_gte, end_lte);
   
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths = await getUpdatedMonthArray();
