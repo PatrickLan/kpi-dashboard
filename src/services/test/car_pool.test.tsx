@@ -1,11 +1,11 @@
 import { getCarData } from '../car_pool_data';
-import { CarPoolResultsArray } from '../../model/car_pool_results_array_interface';
+import { CarPoolResults } from '../../model/car_pool_results_interface';
 
 describe('test getCarData', () => {
   test('getCarData', async () => {
     const carData = await getCarData();
     expect(carData).not.toBeNull();
-    expect(carData).toMatchObject<CarPoolResultsArray[]>([
+    expect(carData).toMatchObject<CarPoolResults[]>([
       {
         id: 526,
         type: 'Wibbel VW up!',

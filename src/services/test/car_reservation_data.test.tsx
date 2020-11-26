@@ -1,11 +1,11 @@
 import { getCarReservationData } from '../car_reservation_data';
-import { CarReservationsArray } from '../../model/car_reservations_array_interface';
+import { CarReservationResults } from '../../model/car_reservation_results_interface';
 
 describe('test getCarReservationData', () => {
   test('getCarReservationData', async () => {
     const carResData = await getCarReservationData("2020-01-01T00:00", "2020-01-02T00:00");
     expect(carResData).not.toBeNull();
-    expect(carResData).toMatchObject<CarReservationsArray[]>([
+    expect(carResData).toMatchObject<CarReservationResults[]>([
       {
         "id": 515342,
         "note": "",
