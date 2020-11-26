@@ -9,6 +9,9 @@ import { getCarData } from '../../services/car_pool_data';
 import { createDataset } from '../../services/createLineChartDataset';
 import  randomRGBColor  from '../../services/randomRgbColor';
 import {createDataline} from '../../services/createDataline';
+import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
+import { CarPoolData} from '../../model/car_pool_interface';
+import {CarPoolResultsArray} from '../../model/car_pool_results_array_interface';
 import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview';
 import {Dataset} from '../../model/dataset_interface';
 import {Dataline} from '../../model/dataline_interface'
@@ -18,20 +21,23 @@ const Dashboard = ()  => {
     const [carBookedTimeDataline, setCarBookedTimeDataline] = useState<Dataline|{}>({});
 
     const getChartData = async () => {
-      let carArray: any = [];
+
+      let carArray: CarPoolData | any = [];
       let distanceDatasets: Dataset[] = [];
       let bookedTimeDatasets: Dataset[] = [];
+
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
   
       //Alle Reservierungsdaten der letzten 12 Monate fetchen
+      
       let first: string = "01";
       let firstDayOfThirteenMonthsAgo: string = moment().subtract(13, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
       let firstDayOfCurrentMonth: string = moment().format('YYYY-MM-DD').substring(0, 8)+first;
       let start_gte: string = `${firstDayOfThirteenMonthsAgo}T00:00`;
       let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
-      const reservationData: any = await getCarReservationData(start_gte, end_lte);
+      const reservationData: CarPoolResultsArray | any = await getCarReservationData(start_gte, end_lte);
   
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();

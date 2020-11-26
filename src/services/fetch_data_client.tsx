@@ -1,20 +1,18 @@
 import { CarPoolData } from '../model/car_pool_interface';
 import { CarReservations } from '../model/car-reservations_interface';
 
+//Fetch all Data CarPoolData or CarReservations
 
+export const getFetchData = async (startUrl: string): Promise<CarPoolData[] | CarReservations[]> => {
 
-export const getFetchData = async (startUrl:string) => {
-
-    const authorizationToken:string = "Token 2920a7e21d0b6ef854c0a53c7299403424086e11";
-    const fetchData:CarPoolData[] | CarReservations [] = [];
+    const authorizationToken: string = "Token 2920a7e21d0b6ef854c0a53c7299403424086e11";
+    const fetchData: CarPoolData[] | CarReservations[] = [];
     let urlArray: string[] = [startUrl];
     let nextPage = null;
-    let counter:number = 0;
-    let hasNextPage:boolean = true; 
-    
+    let hasNextPage: boolean = true;
+
     while (hasNextPage) {
-        counter++
-        // console.log("page number: ", counter)
+
         await fetch(urlArray[urlArray.length - 1], {
             method: "GET",
             headers: {
@@ -25,9 +23,8 @@ export const getFetchData = async (startUrl:string) => {
             .then(response => response.json())
 
             .then(data => {
-                // console.log("data", data.next)
                 nextPage = data.next;
-                fetchData.push(data)
+                fetchData.push(data);
 
                 if (nextPage != null) {
                     hasNextPage = true
@@ -35,15 +32,12 @@ export const getFetchData = async (startUrl:string) => {
                 }
                 else {
                     hasNextPage = false
-                    // console.log("Fetch Completed")
-                }
+                };
 
             })
             .catch(err => console.log('error', err))
-    }
-    
-    // console.log("fetchData", fetchData)
-    return fetchData;
+    };
 
-}
+    return fetchData;
+};
 

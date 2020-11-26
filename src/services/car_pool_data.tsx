@@ -1,13 +1,16 @@
-import {getFetchData} from './fetch_data_client';
+import { getFetchData } from './fetch_data_client';
+import { CarPoolResultsArray } from '../model/car_pool_results_array_interface';
+import { CarPoolData } from '../model/car_pool_interface';
 
-let url:string = "https://devteilautos.zemtu.com/marketplace/api/v2/vehicle";
+// Fetch carPoolData "https://devteilautos.zemtu.com/marketplace/api/v2/vehicle"
 
-export const getCarData = async () => {
-    const carPool = await getFetchData(url);
+let url: string = "https://devteilautos.zemtu.com/marketplace/api/v2/vehicle";
+
+export const getCarData = async (): Promise<CarPoolResultsArray> => {
+    const carPool = await getFetchData(url) as CarPoolData[];
     const carPoolResults = carPool[0].results;
     
-    // console.log("carPoolResults",carPoolResults)
     return carPoolResults;
-}
+};
 
 
