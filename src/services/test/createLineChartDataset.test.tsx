@@ -3,11 +3,11 @@ import { createDataset } from '../createLineChartDataset';
 describe('test createLineChartDataset', () => {
 
     test('createDataset', () => {
-        const dataset = createDataset('auto', [12,17,23,12,11,34,24,56,23,67,33,54], 'rgb(205, 130, 158)')
+        const dataset = createDataset(['auto'], [12,17,23,12,11,34,24,56,23,67,33,54], 'rgb(205, 130, 158)')
         expect(dataset).toBeTruthy();
-        expect(dataset).toMatchObject({label: 'auto',
-          fill: true,
-          lineTension: 0.3,
+        expect(dataset).toMatchObject({label: ['auto'],
+          fill: false,
+          lineTension: 0.2,
           backgroundColor: "rgba(184, 185, 210, .3)",
           borderColor: 'rgb(205, 130, 158)',
           borderCapStyle: "butt",

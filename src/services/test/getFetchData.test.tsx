@@ -1,6 +1,5 @@
 import { getFetchData } from '../fetch_data_client';
-import { CarPoolData } from '../../model/car_pool_interface';
-import { CarPoolResultsArray } from '../../model/car_pool_results_array_interface';
+
 
 describe('test fetch', () =>  {
 
