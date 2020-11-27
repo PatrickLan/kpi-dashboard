@@ -1,6 +1,6 @@
-import {CarReservationsArrayVersions} from './car_reservations_array_versions_interface';
+import {CarReservationsVersions} from './car_reservations_versions_interface';
 
-export interface CarReservationsArray{
+export interface CarReservations{
 
 
             id: number,
@@ -37,7 +37,7 @@ export interface CarReservationsArray{
     distance: number | null,
     lift_offer: boolean,
     state: string | null,
-    versions: CarReservationsArrayVersions[],
+    versions: CarReservationsVersions[],
     odometer_start: number | null,
     odometer_end: number | null
 }

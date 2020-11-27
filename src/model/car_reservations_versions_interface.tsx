@@ -1,4 +1,4 @@
-export interface CarReservationsArrayVersions
+export interface CarReservationsVersions
 {
     modified: string | null,
     state: string | null,
