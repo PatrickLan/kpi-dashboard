@@ -12,8 +12,9 @@ import {createDataline} from '../../services/createDataline';
 import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
 import { CarPoolData} from '../../model/car_pool_interface';
 import {Dataset} from '../../model/dataset_interface';
-import {Dataline} from '../../model/dataline_interface'
-import { CarReservationResults } from "../../model/car_reservation_results_interface";
+import {Dataline} from '../../model/dataline_interface';
+import {CarReservations} from '../../model/car_reservations_interface';
+import getReservationsFromLastTwelveMonths from '../../services/reservations'
 
 const Dashboard = ()  => {
     const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline|{}>({});
@@ -24,20 +25,15 @@ const Dashboard = ()  => {
       let carArray: CarPoolData | any = [];
       let distanceDatasets: Dataset[] = [];
       let bookedTimeDatasets: Dataset[] = [];
+      let arrayWithTwelveTimesZero = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
   
-      //Alle Reservierungsdaten der letzten 12 Monate fetchen
-      
-      let first: string = "01";
-      let firstDayOfThirteenMonthsAgo: string = moment().subtract(13, 'months').format('YYYY-MM-DD').substring(0, 8)+first;     
-      let firstDayOfCurrentMonth: string = moment().format('YYYY-MM-DD').substring(0, 8)+first;
-      let start_gte: string = `${firstDayOfThirteenMonthsAgo}T00:00`;
-      let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
-      const reservationData: CarReservationResults[] = await getCarReservationData(start_gte, end_lte);
-  
+      //Alle Reservierungsdaten der letzten 12 Monate fetchen      
+      const reservationData: CarReservations[] = await getReservationsFromLastTwelveMonths();
+
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();
   
@@ -113,8 +109,10 @@ const Dashboard = ()  => {
          let searchedIndex: number =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
          
          //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren
-         distanceArray[searchedIndex] += distancesTraveled;
-         usedTimeArray[searchedIndex] += bookedTime;
+
+       
+         distanceArray[searchedIndex] += Math.round(distancesTraveled);
+         usedTimeArray[searchedIndex] += Math.round(bookedTime);
         }
   
     
@@ -130,7 +128,7 @@ const Dashboard = ()  => {
         //Reset nach dem Loop
         usedTimeArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         distanceArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        carReservations=[];
+        carReservations = [];
       }
   
       let distanceDataline = createDataline(arrayWithLastTwelveMonths, distanceDatasets);
