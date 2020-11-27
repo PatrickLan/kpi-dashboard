@@ -1,5 +1,3 @@
-import React from "react";
-
 const randomRgbColor = (): string => {
     let x = Math.floor(Math.random() * 256);
     let y = Math.floor(Math.random() * 256);

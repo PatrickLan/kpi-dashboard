@@ -1,7 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-import {Dataline} from '../../model/dataline_interface';
 import SpinnerPage from '../spinner/Spinner';
 
 const AllVehiclesBookedOverview = (props: any) => {  

@@ -2,8 +2,6 @@ import React,{useEffect, useState} from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import "./Dashboard.css";
 import AllVehiclesDistanceOverview from "../allVehicleDistanceOverview/allVehiclesDistanceOverview";
-import moment from 'moment';
-import { getCarReservationData } from '../../services/car_reservation_data';
 import { getUpdatedMonthArray } from '../../services/current_month_array';
 import { getCarData } from '../../services/car_pool_data';
 import { createDataset } from '../../services/createLineChartDataset';
@@ -25,8 +23,6 @@ const Dashboard = ()  => {
       let carArray: CarPoolData | any = [];
       let distanceDatasets: Dataset[] = [];
       let bookedTimeDatasets: Dataset[] = [];
-      let arrayWithTwelveTimesZero = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
