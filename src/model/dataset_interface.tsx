@@ -1,6 +1,6 @@
 
 export interface Dataset {
-    label: string[],
+    label: string,
     fill: boolean,
     lineTension: number,
     backgroundColor: string,
