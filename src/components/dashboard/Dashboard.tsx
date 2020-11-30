@@ -23,13 +23,12 @@ const Dashboard = ()  => {
 
     const getChartData = async () => {
 
-      let carArray: CarPoolResults[]  = [];
+      let carArray: CarPoolResults[] = [];
       let distanceDatasets: Dataset[] = [];
       let bookedTimeDatasets: Dataset[] = [];
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
-      console.log("carArray", carArray)
   
       //Alle Reservierungsdaten der letzten 12 Monate fetchen      
       const reservationData: CarReservationResults[] = await getReservationsFromLastTwelveMonths();

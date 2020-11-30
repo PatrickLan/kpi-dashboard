@@ -4,5 +4,5 @@ export interface CarPoolData {
     count: number;
     next: null | string
 ​    previous: null | string;
-    results: CarPoolResults;
+    results: CarPoolResults[];
 }
