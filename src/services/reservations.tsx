@@ -1,9 +1,6 @@
-import {CarReservations} from '../model/car-reservations_interface';
 import {CarReservationResults} from '../model/car_reservation_results_interface';
 import { getCarReservationData } from '../services/car_reservation_data';
 import moment from 'moment';
-import { CarReservationResultsVersions } from '../model/car_reservations_results_versions_interface';
-
 
 //Alle Reservierungsdaten der vorherigen letzten 12 Monate fetchen
 const getReservationsFromLastTwelveMonths = async (): Promise<CarReservationResults[]> => {
@@ -15,7 +12,6 @@ const getReservationsFromLastTwelveMonths = async (): Promise<CarReservationResu
     let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
     const reservationData: CarReservationResults[]  = await getCarReservationData(start_gte, end_lte);
 
-    console.log("test", reservationData)
     return reservationData;
 }
 

@@ -8,14 +8,11 @@ import { createDataset } from '../../services/createLineChartDataset';
 import  randomRGBColor  from '../../services/randomRgbColor';
 import {createDataline} from '../../services/createDataline';
 import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
-import {CarPoolData} from '../../model/car_pool_interface';
 import {Dataset} from '../../model/dataset_interface';
 import {Dataline} from '../../model/dataline_interface';
-import {CarReservations} from '../../model/car-reservations_interface';
 import getReservationsFromLastTwelveMonths from '../../services/reservations'
 import {CarPoolResults} from '../../model/car_pool_results_interface';
 import {CarReservationResults} from '../../model/car_reservation_results_interface';
-import { CarReservationResultsVersions } from "../../model/car_reservations_results_versions_interface";
 
 const Dashboard = ()  => {
     const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline|{}>({});
