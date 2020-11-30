@@ -1,6 +1,6 @@
 import {Dataset} from '../model/dataset_interface';
 
-export function createDataset ( label: string[], data: number[], rgbColor: string): Dataset {
+export function createDataset ( label: string, data: number[], rgbColor: string): Dataset {
     return {
         label: label,
         fill: false,

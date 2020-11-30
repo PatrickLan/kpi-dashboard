@@ -8,11 +8,14 @@ import { createDataset } from '../../services/createLineChartDataset';
 import  randomRGBColor  from '../../services/randomRgbColor';
 import {createDataline} from '../../services/createDataline';
 import AllVehiclesBookedOverview from '../../components/allVehiclesBookedOverview/allVehiclesBookedOverview'
-import { CarPoolData} from '../../model/car_pool_interface';
+import {CarPoolData} from '../../model/car_pool_interface';
 import {Dataset} from '../../model/dataset_interface';
 import {Dataline} from '../../model/dataline_interface';
-import {CarReservations} from '../../model/car_reservations_interface';
+import {CarReservations} from '../../model/car-reservations_interface';
 import getReservationsFromLastTwelveMonths from '../../services/reservations'
+import {CarPoolResults} from '../../model/car_pool_results_interface';
+import {CarReservationResults} from '../../model/car_reservation_results_interface';
+import { CarReservationResultsVersions } from "../../model/car_reservations_results_versions_interface";
 
 const Dashboard = ()  => {
     const [carDistanceDataline, setCarDistanceDataline] = useState<Dataline|{}>({});
@@ -20,15 +23,16 @@ const Dashboard = ()  => {
 
     const getChartData = async () => {
 
-      let carArray: CarPoolData | any = [];
+      let carArray: CarPoolResults[]  = [];
       let distanceDatasets: Dataset[] = [];
       let bookedTimeDatasets: Dataset[] = [];
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
+      console.log("carArray", carArray)
   
       //Alle Reservierungsdaten der letzten 12 Monate fetchen      
-      const reservationData: CarReservations[] = await getReservationsFromLastTwelveMonths();
+      const reservationData: CarReservationResults[] = await getReservationsFromLastTwelveMonths();
 
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();
@@ -37,7 +41,7 @@ const Dashboard = ()  => {
       let distanceArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       let usedTimeArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       
-      let carReservations:any = [];
+      let carReservations:CarReservationResults[] = [];
   
       // loop durch fahrzeugliste
       for ( let i=0; i < carArray.length; i++) {

@@ -19,6 +19,5 @@ export const getCarReservationData = async (start_gte: string, end_lte: string):
         carReservationArrays.push(carReservationArray.results[i])
         };
     });
-    console.log("carer", carReservationArrays)
     return carReservationArrays;
 };
