@@ -34,7 +34,7 @@ export interface CarReservationResults{
 
     created: string | null,
     modified: string | null,
-    distance: number,
+    distance: number | null,
     lift_offer: boolean,
     state: string | null,
     versions: CarReservationResultsVersions[],

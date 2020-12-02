@@ -54,7 +54,7 @@ const Dashboard = ()  => {
         //loop durch das Array mit den Reservierung des Fahrzeugs um die gefahrene Distanz zu bekommen
         for (let i=0; i<carReservations.length; i++){
           // zurückgelegt Distanz/Fahrzeug/Monat für die Distanzkomponente
-          let distancesTraveled = carReservations[i].distance;
+          let distancesTraveled: number | null = carReservations[i].distance;
   
           // gefahrene Zeit/Fahrzeug/Monat für die Zeitkomponente
           let bookedTime = (Date.parse(carReservations[i].reservation_end) - Date.parse(carReservations[i].reservation_start))/3600000;
@@ -104,10 +104,12 @@ const Dashboard = ()  => {
   
          let searchedIndex: number =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
          
-         //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren
-
-       
-         distanceArray[searchedIndex] += Math.round(distancesTraveled);
+         //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren       
+        if (distancesTraveled != null) {
+          distanceArray[searchedIndex] += Math.round(distancesTraveled);
+        } else {
+          distanceArray[searchedIndex] += 0;
+        }
          usedTimeArray[searchedIndex] += Math.round(bookedTime);
         }
   
