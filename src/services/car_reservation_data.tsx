@@ -13,6 +13,7 @@ export const getCarReservationData = async (start_gte: string, end_lte: string):
     const carReservationArrays: CarReservationResults[]  = []; 
     
     const carReservationFetch: CarReservations[] = await getFetchData(url) as CarReservations[];
+    console.log("carreservationsCheckIncar_reservations", carReservationFetch)
     carReservationFetch.forEach((carReservationArray:CarReservations) => { 
         
         for(let i = 0; i < carReservationArray.results.length; i++){

@@ -6,11 +6,12 @@ import { CarPoolData } from '../model/car_pool_interface';
 
 let url: string = "https://devteilautos.zemtu.com/marketplace/api/v2/vehicle";
 
-export const getCarData = async (): Promise<CarPoolResults[]> => {
+export const getCarData = async (): Promise<any> => {
     const carPool = await getFetchData(url) as CarPoolData[];
-    const carPoolResults: CarPoolResults[]  =  carPool[0].results
+    console.log("carpool", carPool)
+    // const carPoolResults: CarPoolResults[]  =  carPool[0].results
 
-    return carPoolResults;
+    return carPool;
 };
 
 

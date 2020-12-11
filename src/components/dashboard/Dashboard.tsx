@@ -26,10 +26,11 @@ const Dashboard = ()  => {
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
-  
+      console.log("CADSDD", carArray)
+
       //Alle Reservierungsdaten der letzten 12 Monate fetchen      
       const reservationData: CarReservationResults[] = await getReservationsFromLastTwelveMonths();
-
+      console.log("TEST", reservationData)
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();
   
@@ -63,57 +64,57 @@ const Dashboard = ()  => {
           let actualReservationMonth: string = carReservations[i].end_booked.slice(5, 7);
           let searchedMonth: string = "";
           
-          switch(actualReservationMonth){
-            case "01":
-              searchedMonth = "Januar";
-              break;
-            case "02":
-              searchedMonth = "Februar";
-              break;
-            case "03":
-              searchedMonth = "März";
-              break;
-            case "04":
-              searchedMonth = "April";
-              break;
-            case "05":
-              searchedMonth = "Mai";
-              break;  
-            case "06":
-              searchedMonth = "Juni";
-              break;  
-            case "07":
-              searchedMonth = "Juli";
-              break;
-            case "08":
-              searchedMonth = "August";
-              break;
-            case "09":
-              searchedMonth = "September";
-              break;
-            case "10":
-              searchedMonth = "Oktober";
-              break;
-            case "11":
-              searchedMonth = "November";
-              break;
-            case "12":
-              searchedMonth = "Dezember";
-              break;
-         }
+        switch(actualReservationMonth){
+          case "01":
+            searchedMonth = "Januar";
+            break;
+          case "02":
+            searchedMonth = "Februar";
+            break;
+          case "03":
+            searchedMonth = "März";
+            break;
+          case "04":
+            searchedMonth = "April";
+            break;
+          case "05":
+            searchedMonth = "Mai";
+            break;  
+          case "06":
+            searchedMonth = "Juni";
+            break;  
+          case "07":
+            searchedMonth = "Juli";
+            break;
+          case "08":
+            searchedMonth = "August";
+            break;
+          case "09":
+            searchedMonth = "September";
+            break;
+          case "10":
+            searchedMonth = "Oktober";
+            break;
+          case "11":
+            searchedMonth = "November";              
+            break;
+          case "12":
+            searchedMonth = "Dezember";
+            break;
+        }
   
-         let searchedIndex: number =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
+        let searchedIndex: number =  arrayWithLastTwelveMonths.indexOf(searchedMonth);
          
-         //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren       
+        //Daten im Array der Komponenten in der selben Reihenfolge wie im Array mit Monaten sortieren       
         if (distancesTraveled != null) {
           distanceArray[searchedIndex] += Math.round(distancesTraveled);
         } else {
           distanceArray[searchedIndex] += 0;
         }
+        
          usedTimeArray[searchedIndex] += Math.round(bookedTime);
         }
-  
-    
+      
         //Erstellen der Datasets zur grafischen Darstellung
         let color: string = randomRGBColor();
 
