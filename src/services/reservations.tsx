@@ -1,12 +1,10 @@
-
-import { getCarReservationData } from '../services/car_reservation_data';
 import moment from 'moment';
 import {getCountFetch} from '../services/reservationPages';
 import {getFetchData} from '../services/fetch_data_client';
 import {CarReservationResults} from '../model/car_reservation_results_interface';
 
+
 //Alle Reservierungsdaten der vorherigen letzten 12 Monate fetchen
-// const getReservationsFromLastTwelveMonths = async (): Promise<CarReservationResults[]> => {
     const getReservationsFromLastTwelveMonths = async (): Promise<CarReservationResults[]> => {
 
     let first: string = "01";
@@ -14,7 +12,6 @@ import {CarReservationResults} from '../model/car_reservation_results_interface'
     let firstDayOfCurrentMonth: string = moment().format('YYYY-MM-DD').substring(0, 8)+first;
     let start_gte: string = `${firstDayOfThirteenMonthsAgo}T00:00`;
     let end_lte: string = `${firstDayOfCurrentMonth}T00:00`;
-
     
     let firstUrl: string = `https://devteilautos.zemtu.com/api/v2/reservationaccounting/?reservation_start__gte=${start_gte}&reservation_end__lte=${end_lte}`
     let pagesNumber = await getCountFetch(firstUrl);
@@ -28,11 +25,13 @@ import {CarReservationResults} from '../model/car_reservation_results_interface'
     
     let promises = arrayWithUrls.map(url => getFetchData(url));
     
-    const getResults = async () => {
-        let resultsArray: any = [];
-        let reservationArray: any = [];
+    const getResults = async (): Promise<CarReservationResults[]> => {
+
+        let resultsArray: CarReservationResults[][] = [];
+        let reservationArray: CarReservationResults[] = [];
+        
         await Promise.all(promises).then(results => {
-             resultsArray = results;
+             resultsArray = results as CarReservationResults[][];   
         })
 
         for (let i = 0; i < resultsArray.length; i++){
@@ -40,12 +39,9 @@ import {CarReservationResults} from '../model/car_reservation_results_interface'
                 reservationArray.push(resultsArray[i][j])
             }
         }
-
         return reservationArray
     }
-
-    const reservationArray = await getResults();
-    // console.log("array", reservationArray)
+    const reservationArray: CarReservationResults[] = await getResults();
 
     return reservationArray
 }

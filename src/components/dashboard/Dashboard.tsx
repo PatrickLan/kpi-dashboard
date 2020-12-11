@@ -26,11 +26,10 @@ const Dashboard = ()  => {
   
       // Liste mit den Fahrzeugen fetchen
       carArray = await getCarData();
-      console.log("CADSDD", carArray)
 
       //Alle Reservierungsdaten der letzten 12 Monate fetchen      
       const reservationData: CarReservationResults[] = await getReservationsFromLastTwelveMonths();
-      console.log("TEST", reservationData)
+
       //Array mit den letzten 12 Monaten importieren
       let arrayWithLastTwelveMonths: string[] = await getUpdatedMonthArray();
   
