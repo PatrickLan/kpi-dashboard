@@ -3,12 +3,11 @@ import { CarReservations } from '../model/car-reservations_interface';
 
 //Fetch all Data CarPoolData or CarReservations
 
-export const getFetchData = async (url: string): Promise<CarPoolData[] | CarReservations[]> => {
+    export const getFetchData = async (url: string): Promise<CarPoolData[] | CarReservations[]> => {
 
     const authorizationToken: string = "Token 2920a7e21d0b6ef854c0a53c7299403424086e11";
-    const fetchData: CarPoolData[] | CarReservations[] = [];
+    let fetchData: any;
  
-
         await fetch(url, {
             method: "GET",
             headers: {
@@ -19,11 +18,10 @@ export const getFetchData = async (url: string): Promise<CarPoolData[] | CarRese
             .then(response => response.json())
 
             .then(data => {
-                fetchData.push(data);
+                fetchData = data.results;
             })
             .catch(err => console.log('error', err))
  
-            console.log("fetchdata", fetchData)
     return fetchData;
 };
 
