@@ -41,6 +41,8 @@
     ]
   },
   "devDependencies": {
+    "@apollo/client": "^3.3.6",
+    "graphql": "^15.4.0",
     "mdbreact": "^4.27.0"
   }
 }
