@@ -6,7 +6,7 @@ const uri = "https://devteilautos.zemtu.com/graphql";
 export function useGraphqlClient() {
 
 
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im9saXZlciIsImV4cCI6MTU5MTg3Mzg4Niwib3JpZ0lhdCI6MTU5MTg3MzI4Nn0.kTwH28Qblrl07BB4JvGGGv4TmLENa_kqJn4aoN6g3qk'
+    const token = 'XXX'
     
     // localStorage.getItem('token');
     
