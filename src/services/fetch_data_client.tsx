@@ -7,7 +7,7 @@ import {CarReservationResults} from '../model/car_reservation_results_interface'
 
     export const getFetchData = async (url: string): Promise<CarReservations[] | CarPoolResults[] | CarReservationResults[]> => {
 
-    const authorizationToken: string = "Token 2920a7e21d0b6ef854c0a53c7299403424086e11";
+    const authorizationToken: string = "XXX";
     let fetchData: CarReservations[] | CarPoolResults[] | CarReservationResults[] = [];
  
         await fetch(url, {
