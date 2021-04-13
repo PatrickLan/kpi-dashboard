@@ -151,10 +151,6 @@ const Dashboard = ()  => {
           <AllVehiclesBookedOverview carBookedTimeDataline={carBookedTimeDataline}/>
         </MDBCol>
       </MDBRow>
-      <MDBRow> 
-        <MDBCol><p>seite 3</p></MDBCol>
-        <MDBCol><p>seite 4</p></MDBCol>
-      </MDBRow>
     </MDBContainer>
   );
 };
